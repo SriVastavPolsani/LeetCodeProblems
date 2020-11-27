@@ -1,0 +1,40 @@
+public class Solution {
+    public IList<IList<int>> ThreeSum(int[] nums) {
+        var threeSumList = new List<IList<int>>();  
+        
+        Array.Sort(nums);
+        
+        for(int i = 0; i < nums.Length-2 ; i++)
+        {
+            int left = i+1, right = nums.Length-1;
+            if(i == 0 || (i> 0 && nums[i]!=nums[i-1]))
+            {
+                while(left < right)
+                {
+                    if(nums[left] + nums[right] == -1 * nums[i])
+                    {
+                        var triplet = new List<int>();
+                        triplet.Add(nums[i]);                        
+                        triplet.Add(nums[left]);
+                        triplet.Add(nums[right]);
+                        threeSumList.Add(triplet);
+                        while(left < right && nums[left] == nums[left + 1]) left++;
+                        while(left < right && nums[right] == nums[right - 1]) right--;
+                        left++;
+                        right--;
+                        
+                    }
+                    else if(nums[left] + nums[right] > -1 * nums[i])
+                    {
+                     right--;   
+                    }
+                    else
+                    {
+                        left++;
+                    }
+                }
+            }
+        }
+        return threeSumList;
+    }
+}
