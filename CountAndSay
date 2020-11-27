@@ -1,0 +1,29 @@
+public class Solution {
+    public string CountAndSay(int n) {
+        string x = "1";
+        if(n==1) return x;
+        
+        for(int i = 1 ; i <= n-1 ; i++)
+        {
+            char z = x[0];
+            int ctr = 0;
+            string soln = string.Empty;
+           for(int j = 0; j < x.Length ; j++)
+           {
+               if(x[j] == z)
+               {
+                   ctr++;
+               }
+               else
+               {
+                   soln = soln + ctr.ToString() + z.ToString();
+                   ctr = 1;
+                   z = x[j];
+               }
+           }
+            soln = soln + ctr.ToString() + z.ToString();            
+            x = soln;
+        }
+        return x.ToString();
+    }
+}
