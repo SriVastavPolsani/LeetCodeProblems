@@ -1,0 +1,25 @@
+public class Solution {
+    public int MaxArea(int[] height) {
+        int width = 0;
+        int left = 0;
+        int right = height.Length-1;
+        int area = Int32.MinValue;
+        
+        while(left<right)
+        {
+            width = right - left;
+            int length = height[left] > height[right] ? height[right] : height[left];
+             area = Math.Max(area,width * length);
+            
+            if(height[left] > height[right])
+            {
+             right--;   
+            }
+            else
+            {
+                left++;
+            }            
+        }
+        return area;
+    }
+}
