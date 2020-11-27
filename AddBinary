@@ -1,0 +1,68 @@
+public class Solution {
+    public string AddBinary(string a, string b) {
+        string lonstr = a.Length >= b.Length ? a : b;
+        string shortStr = lonstr.Length == a.Length ? b : a;
+        int carry = 0;
+        int sum = 0;
+        int i = lonstr.Length -1;
+        int j = shortStr.Length -1;
+        //int[] newStr =  new int[lonstr.Length];
+        StringBuilder sb = new StringBuilder();
+        while( i>=0 )
+        {
+            if(j >= 0){
+                sum = lonstr[i]-'0' + shortStr[j]-'0' + carry;
+                if(sum == 0)
+                {
+                    sb.Insert(0,0);
+                    carry = 0;
+                }
+                else if(sum == 1 )
+                {
+                    sb.Insert(0,1);
+                    carry = 0;
+                }
+                else if(sum == 2 )
+                {
+                    sb.Insert(0,0);
+                    carry = 1;
+                }
+                else
+                {
+                    sb.Insert(0,1);
+                    carry = 1;
+                }
+                j--;
+            }
+            else
+            {
+                sum = lonstr[i]-'0' + carry;
+                if(sum == 0)
+                {
+                    sb.Insert(0,0);
+                    carry = 0;
+                }
+                else if(sum == 1 )
+                {
+                    sb.Insert(0,1);
+                    carry = 0;
+                }
+                else if(sum == 2 )
+                {
+                    sb.Insert(0,0);
+                    carry = 1;
+                }
+                else
+                {
+                    sb.Insert(0,1);
+                    carry = 1;
+                }
+            }
+            i--;
+        }
+        if(carry == 1)
+          sb.Insert(0,1);
+        
+    return sb.ToString();
+    }
+}
