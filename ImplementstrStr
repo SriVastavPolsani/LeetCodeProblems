@@ -1,0 +1,30 @@
+public class Solution {
+    public int StrStr(string haystack, string needle) {
+        if(needle == "")
+            return 0;
+        int haystackLength = haystack.Length;
+        int needleLength = needle.Length;
+        
+        if(haystackLength < needleLength)
+        {
+            return -1;
+        }
+        
+        for(int i = 0; i <= haystackLength-needleLength; ++i)
+        {
+            int j = 0;
+            for(j = 0; j<needleLength; ++j)
+            {
+                if(needle[j] !=  haystack[i+j])
+                {
+                    break;
+                }
+            }
+            if( j == needleLength)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
