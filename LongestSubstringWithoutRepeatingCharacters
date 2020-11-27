@@ -1,0 +1,24 @@
+public class Solution {
+    public int LengthOfLongestSubstring(string s) {
+        HashSet<char> uniqueChars = new HashSet<char>();
+        int subStrLen = 0;
+        int left = 0;
+        int right = 0;
+        
+        while(right < s.Length)
+        {
+         if(!(uniqueChars.Contains(s[right])))
+            {
+             uniqueChars.Add(s[right]);
+                subStrLen = Math.Max(uniqueChars.Count, subStrLen);
+                right++;               
+            }
+            else
+            {
+            uniqueChars.Remove(s[left]);
+             left++; 
+            }   
+        }
+        return subStrLen;
+    }
+}
