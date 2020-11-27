@@ -1,0 +1,43 @@
+public class Solution {
+    public double FindMedianSortedArrays(int[] nums1, int[] nums2) {
+        int x = nums1.Length;
+        int y = nums2.Length;
+        
+        if (y < x)
+            return FindMedianSortedArrays(nums2, nums1);
+        
+        int low = 0;
+        int high = x;
+        
+        while(low <= high)
+        {
+            int partitionX = (low+high)/2;
+            int partitionY = (x+y+1)/2 - partitionX; //partitionX+partitionY=(x+y+1)/2 - formula
+                                                    //+1 is used to handle odd and even count at the same time.
+            
+            int xLeft = partitionX == 0 ? Int32.MinValue : nums1[partitionX-1]; //partition neighbors
+            int xRight = partitionX == x ? Int32.MaxValue : nums1[partitionX];
+            
+            int yLeft = partitionY == 0 ? Int32.MinValue : nums2[partitionY-1];
+            int yRight = partitionY == y ? Int32.MaxValue : nums2[partitionY];
+            
+            if(xLeft <= yRight && yLeft <= xRight) //soln found
+            {
+                if((x+y)%2 == 0)
+                    return ((double)Math.Max(xLeft,yLeft) + Math.Min(xRight,yRight))/2; //formula for even ct
+                else
+                    return (double)Math.Max(xLeft,yLeft); //formula for odd ct
+            }
+            
+            else if(xLeft>yRight)
+                high = partitionX - 1;
+            
+            else
+                low = partitionX + 1;
+            
+            }
+        
+        throw new System.ArgumentException();
+        
+    }
+}
