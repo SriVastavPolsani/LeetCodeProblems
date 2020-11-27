@@ -1,0 +1,24 @@
+public class Solution {
+    public bool IsValid(string s) {
+        var bracketMapping = new Dictionary<char, char>(){{'(',')'}, {'[',']'}, {'{','}'}};
+        var openBracketStack = new Stack();
+        
+        foreach(char c in s)
+        {
+            if(bracketMapping.ContainsKey(c))
+            {
+                openBracketStack.Push(c);
+            }
+            else
+            {
+                if(openBracketStack.Count == 0 || bracketMapping[Convert.ToChar(openBracketStack.Pop())] != c )
+                    return false;
+            }
+        }
+        
+        if(openBracketStack.Count != 0)
+            return false;
+        else 
+            return true;
+    }
+}
