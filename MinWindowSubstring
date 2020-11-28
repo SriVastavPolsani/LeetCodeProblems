@@ -1,0 +1,52 @@
+public class Solution {
+    public string MinWindow(string s, string t) {
+        string minWindow = "";
+        int minWindowLength = Int32.MaxValue;
+        var tCharDictionary = new Dictionary<char, int>();
+        int counter = t.Length;
+        
+        foreach(char c in t)
+        {
+            if(tCharDictionary.ContainsKey(c))
+            {
+                tCharDictionary[c]++;
+            }
+            else
+            {
+                tCharDictionary.Add(c,1);
+            }
+        }
+        
+        int left = 0;
+        
+        for(int right = 0; right < s.Length; right++)
+        {
+            if(tCharDictionary.ContainsKey(s[right]))
+            {
+              if(tCharDictionary[s[right]]-- > 0)
+              {
+                  counter--;
+              }
+            }
+            
+            while(counter == 0)
+            {
+                if(right - left + 1 < minWindowLength)
+                {
+                    minWindowLength = right - left + 1;
+                    minWindow = s.Substring(left, minWindowLength);
+                }
+                
+                if(tCharDictionary.ContainsKey(s[left]))
+                {
+                    if(tCharDictionary[s[left]]++ >= 0)
+                        {
+                            counter++;
+                        }                    
+                }
+                left++;
+            }            
+        }
+        return minWindow;
+    }
+}
