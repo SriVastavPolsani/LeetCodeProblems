@@ -1,0 +1,41 @@
+public class Solution {
+    public string MostCommonWord(string paragraph, string[] banned) {
+        string[] paragraphArray = paragraph.Split(' ',',');
+        var wordCountDictionary = new Dictionary<string,int>();
+        int maxCount = 0;
+        string result = "";         
+        var bannedList = banned.ToList();
+        
+        foreach(string s in paragraphArray)
+        {
+            string str = new string((from c in s
+                                   where char.IsLetterOrDigit(c)
+                                   select c).ToArray()); 
+            string strInLower = str.ToLower();
+            if(!String.IsNullOrEmpty(strInLower) && !bannedList.Contains(strInLower))
+            {                
+            if(wordCountDictionary.ContainsKey(strInLower))
+            {
+                wordCountDictionary[strInLower]++;
+            }
+            else
+            {
+             wordCountDictionary.Add(strInLower,1);   
+            }
+                
+            }
+        }
+        
+        var words = wordCountDictionary.Keys.ToList();
+        
+        foreach(string word in words)
+        {
+                if(maxCount < wordCountDictionary[word] )
+                {
+                    maxCount = wordCountDictionary[word];
+                    result = word;
+                }
+        }
+        return result;
+    }
+}
