@@ -1,0 +1,15 @@
+public class Solution {
+    public int NumPairsDivisibleBy60(int[] time) {
+        int numOfPairs = 0;
+        int[] remainingSecsLib = new int[60];
+        int remainingSecs = 0;
+        
+        foreach(int t in time)
+        {
+            remainingSecs = t%60;
+            numOfPairs += remainingSecsLib[(60-remainingSecs)%60];
+            remainingSecsLib[remainingSecs]++;            
+        }
+        return numOfPairs;
+    }
+}
