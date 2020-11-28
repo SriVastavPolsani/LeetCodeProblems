@@ -1,0 +1,43 @@
+public class Solution {
+    public class MyComparer : IComparer<string>
+    {
+        public int Compare(string str1, string str2)
+        {
+            string[] str1Array = str1.Split(" ",2);
+            string[] str2Array = str2.Split(" ",2);
+            
+            bool isDigit1 = Char.IsDigit(str1Array[1][0]);
+            bool isDigit2 = Char.IsDigit(str2Array[1][0]);
+            
+            if(!isDigit1 && !isDigit2)
+            {
+                int cmp = str1Array[1].CompareTo(str2Array[1]);
+                if(cmp == 0)
+                {
+                    return str1Array[0].CompareTo(str2Array[0]);
+                }
+                return cmp;
+            }
+            
+            else if(!isDigit1 && isDigit2)
+            {
+                return -1;
+            }
+            
+            else if(isDigit1 && !isDigit2)
+            {
+                return 1;
+            }
+            
+            else
+            {
+                return 0;
+            }
+        }
+    }
+    public string[] ReorderLogFiles(string[] logs) {
+        var myComp = new MyComparer();
+        logs = logs.OrderBy(x=>x, myComp).ToArray();
+        return logs;
+    }
+}
