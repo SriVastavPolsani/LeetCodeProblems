@@ -1,0 +1,27 @@
+public class Solution {
+    public int[] ProductExceptSelf(int[] nums) {
+        int arrayLength = nums.Length;
+        int[] productArray = new int[arrayLength];
+        int[] leftProductArray = new int[arrayLength];        
+        int[] rightProductArray = new int[arrayLength]; 
+        
+        leftProductArray[0] = 1;
+        for(int i = 1; i < arrayLength; i++)
+        {
+                leftProductArray[i] = leftProductArray[i-1] * nums[i-1]; 
+        }
+        
+        rightProductArray[arrayLength-1] = 1;
+        for(int j = arrayLength-2; j >= 0; j--)
+        {
+                rightProductArray[j] = rightProductArray[j+1] * nums[j+1]; 
+        }
+        
+        for(int k = 0; k < arrayLength; k++)
+        {
+         productArray[k] = leftProductArray[k] * rightProductArray[k];   
+        }
+        
+        return productArray;
+    }
+}
