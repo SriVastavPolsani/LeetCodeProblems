@@ -1,0 +1,26 @@
+public class Solution {
+    public IList<int> GetRow(int rowIndex) {
+        IList<int> firstRow = new List<int>();
+        firstRow.Add(1);
+        IList<IList<int>> pTriangle = new List<IList<int>>();
+        pTriangle.Add(firstRow);
+        
+        if(rowIndex == 0)
+            return firstRow;
+        
+        for(int i=1; i<=rowIndex; i++)
+        {
+            IList<int> currRow = new List<int>();
+            currRow.Add(1);
+            
+            IList<int> prevRow = pTriangle[i-1];
+            for(int j=1 ; j<i ; j++)
+            {
+                currRow.Add(prevRow[j-1] + prevRow[j]); 
+            }
+            currRow.Add(1);
+            pTriangle.Add(currRow);
+        }
+        return pTriangle[rowIndex];
+    }
+}
