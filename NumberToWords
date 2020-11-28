@@ -1,0 +1,46 @@
+public class Solution {
+    public string NumberToWords(int num) {
+        string[] uptoTwenty = {"Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"};
+        var tens = new Dictionary<int, string>(){{2, "Twenty"}, {3, "Thirty"}, {4, "Forty"}, {5, "Fifty"}, {6, "Sixty"}, {7, "Seventy"}, {8, "Eighty"}, {9, "Ninety"}};
+        
+        if(num < 20)
+        {
+         return uptoTwenty[num];   
+        }
+        else if(num < 100)
+        {
+            if(num%10 > 0)                
+                return tens[num/10] +" "+ uptoTwenty[num%10];
+            else
+                return tens[num/10];
+        }
+        else if(num < 1000)
+        {
+            if(num%100 > 0)                
+                return uptoTwenty[num/100] +" Hundred "+ NumberToWords(num%100);
+            else
+                return uptoTwenty[num/100] + " Hundred";
+        }
+        else if(num < 1000000)
+        {
+            if(num%1000 > 0)                
+                return NumberToWords(num/1000) +" Thousand "+ NumberToWords(num%1000);
+            else
+                return NumberToWords(num/1000) + " Thousand";
+        }
+        else if(num < 1000000000)
+        {
+            if(num%1000000 > 0)                
+                return NumberToWords(num/1000000) +" Million "+ NumberToWords(num%1000000);
+            else
+                return NumberToWords(num/1000000) + " Million";
+        }
+        else
+        {
+            if(num%1000000000 > 0)                
+                return NumberToWords(num/1000000000) +" Billion "+ NumberToWords(num%1000000000);
+            else
+                return NumberToWords(num/1000000000) + " Billion";
+        }
+    }
+}
