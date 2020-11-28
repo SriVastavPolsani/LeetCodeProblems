@@ -1,0 +1,21 @@
+public class Solution {
+    public int MySqrt(int x) {
+        long low = 0; //Need to use long here for some reason otherwise timing out on bigger inputs
+        long high = x;
+        
+        long sqRtx = 0;
+        
+        while(low<=high) //Classic binary dearch
+        {            
+            sqRtx = (low+high)/2;
+            
+            if (sqRtx*sqRtx == x || (sqRtx*sqRtx < x && (sqRtx+1)*(sqRtx+1) >x)) //the second condition to handle                                                                                       decimal cases
+                return (int)sqRtx;
+            else if (sqRtx*sqRtx > x)
+                high = sqRtx - 1;
+            else if (sqRtx*sqRtx < x)
+                low = sqRtx + 1;
+        }        
+        throw new System.ArgumentException();
+    }
+}
