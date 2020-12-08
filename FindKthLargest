@@ -1,0 +1,12 @@
+public class Solution {
+    public int FindKthLargest(int[] nums, int k) {
+        Array.Sort(nums);
+        Array.Reverse(nums);
+        int i  = 0;
+        while(i < k-1)
+        {
+            i++;
+        }
+        return nums[i];
+    }
+}
