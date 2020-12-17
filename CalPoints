@@ -1,0 +1,31 @@
+public class Solution {
+    public int CalPoints(string[] ops) {
+        Stack<int> scores = new Stack<int>();
+        
+        foreach(string op in ops)
+        {
+            if(op == "+")
+            {
+                int top = scores.Pop();
+                int newTop = scores.Peek() + top;
+                scores.Push(top);
+                scores.Push(newTop);                
+            }
+            else if(op == "D")
+            {
+                int newTop = 2 * scores.Peek();
+                scores.Push(newTop);                
+            }
+            else if(op == "C")
+            {
+                scores.Pop();
+            }
+            else
+            {
+                scores.Push(Convert.ToInt32(op));
+            }
+        }
+        
+        return scores.Sum();
+    }
+}
