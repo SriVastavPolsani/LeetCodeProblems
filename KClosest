@@ -1,0 +1,36 @@
+public class Solution {
+    public int[][] KClosest(int[][] points, int K) {
+        int pointsLength = points.Length;
+        double[] distances = new double[pointsLength];
+        
+        for(int i = 0; i < pointsLength; i++)
+        {
+            distances[i] = Distance(points[i]);
+        }
+        
+        Array.Sort(distances);
+        double distK = distances[K-1];
+        
+        int t = 0;
+        int[][] result = new int[K][];
+        
+        for(int i = 0; i < pointsLength; i++)
+        {
+            if(Distance(points[i]) <= distK)
+            {
+                result[t++] = points[i];   
+            }
+        }
+        
+        return result;
+    }
+    
+    private double Distance(int[] point)
+    {
+        double distance = 0;
+        distance = (point[0] * point[0]) + (point[1] * point[1]);
+        distance = Math.Sqrt(distance);
+        
+        return distance;
+    }
+}
