@@ -1,0 +1,21 @@
+public class Solution {
+    public string BreakPalindrome(string palindrome) {
+        int palindromeLength = palindrome.Length;
+        if(palindromeLength <= 1)
+            return "";
+        
+        char[] palindromeCharArray = palindrome.ToCharArray();
+        
+        for(int i = 0; i < palindromeLength/2; i++)
+        {
+            if(palindromeCharArray[i] != 'a')
+            {
+                palindromeCharArray[i] = 'a';
+                return new string(palindromeCharArray);
+            }
+        }
+        
+        palindromeCharArray[palindromeLength - 1] = 'b';
+        return new string(palindromeCharArray);
+    }
+}
