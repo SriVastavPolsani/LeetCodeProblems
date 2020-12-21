@@ -1,0 +1,46 @@
+/*
+// Definition for a Node.
+public class Node {
+    public int val;
+    public Node next;
+    public Node random;
+    
+    public Node(int _val) {
+        val = _val;
+        next = null;
+        random = null;
+    }
+}
+*/
+
+public class Solution {
+    public Node CopyRandomList(Node head) {
+        if(head == null)
+            return null;
+        
+        var oldNewDict = new Dictionary<Node, Node>();
+        Node node = head;
+        Node newNode = new Node(head.val);
+        
+        while(node != null)
+        {
+            newNode = new Node(node.val);
+            oldNewDict.Add(node, newNode);
+            node = node.next;
+        }
+        
+        node = head;
+                
+        while (node != null)
+        {
+            newNode = oldNewDict[node];
+            
+            newNode.next = node.next == null ? null : oldNewDict[node.next];
+            newNode.random = node.random == null ? null : oldNewDict[node.random];
+            
+            node = node.next; 
+        }
+        
+        return oldNewDict[head];    
+    }        
+    }
