@@ -1,0 +1,47 @@
+public class Solution {
+    public int MaximalSquare(char[][] matrix) {
+        int maxSqLen = 0;
+        int rows = matrix.Length, columns = rows > 0 ? matrix[0].Length : 0;
+        
+        for(int i = 0; i < rows ; i++)
+        {
+            for(int j = 0; j < columns; j++)
+            {
+                if(matrix[i][j] == '1')
+                {
+                    int currSqLen = 1;
+                    bool sqFlag = true;
+                    while(currSqLen+i < rows && currSqLen+j < columns && sqFlag)
+                    {
+                        for(int k = j ; k <= currSqLen+j ; k++)
+                     {
+                         if(matrix[i+currSqLen][k] == '0')
+                         {
+                             sqFlag = false;
+                             break;
+                         }
+                     }
+                     for(int k = i ; k <= currSqLen+i ; k++)
+                     {
+                         if(matrix[k][j+currSqLen] == '0')
+                         {
+                             sqFlag = false;
+                             break;
+                         }
+                     }                      
+                        if(sqFlag)
+                        {
+                         currSqLen++;   
+                        }
+                    }
+                    
+                        if(maxSqLen < currSqLen)
+                        {
+                            maxSqLen = currSqLen;
+                        }
+                }
+            }
+        }
+        return maxSqLen*maxSqLen;
+    }
+}
