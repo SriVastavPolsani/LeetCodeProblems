@@ -1,0 +1,32 @@
+public class Solution {
+    public char SlowestKey(int[] releaseTimes, string keysPressed) {
+        char slowestKey = 'z';
+        int maxReleaseTime = 0;
+        int currReleaseTime = 0;
+        int noOfKeysPressed = keysPressed.Length;
+        
+        for(int i = 0; i < noOfKeysPressed; i++)
+        {
+            if(i == 0)
+            {
+                currReleaseTime = releaseTimes[0];
+            }
+            else
+            {
+                currReleaseTime = releaseTimes[i] - releaseTimes[i-1];
+            }
+            
+            if(currReleaseTime > maxReleaseTime)
+            {
+                maxReleaseTime = currReleaseTime;
+                slowestKey = keysPressed[i];
+            }
+            else if(currReleaseTime == maxReleaseTime)
+            {
+                if(keysPressed[i] > slowestKey)
+                    slowestKey = keysPressed[i];
+            }
+        }
+        return slowestKey;
+    }
+}
