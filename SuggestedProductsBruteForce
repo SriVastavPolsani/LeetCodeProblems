@@ -1,0 +1,23 @@
+public class Solution {
+    public IList<IList<string>> SuggestedProducts(string[] products, string searchWord) {
+        Array.Sort(products);
+        
+        IList<IList<string>> suggestedProductsList = new List<IList<string>>();
+        
+        for(int i = 0; i < searchWord.Length; i++)
+        {
+            IList<string> currentSuggestions = new List<string>();
+            foreach(string product in products)
+            {
+                if(product.Length > i && searchWord.Substring(0, i+1) == product.Substring(0,i+1))
+                {
+                   currentSuggestions.Add(product); 
+                }
+                if(currentSuggestions.Count == 3)
+                    break;
+            }
+            suggestedProductsList.Add(currentSuggestions);
+        }
+        return suggestedProductsList;
+    }
+}
