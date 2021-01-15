@@ -1,0 +1,44 @@
+public class Solution {
+    
+    public bool IsAlienSorted(string[] words, string order) {
+         
+        Dictionary<char,int> alienDictionary = new Dictionary<char,int>();
+    
+         for(int i = 0; i < order.Length; i++)
+         {
+            alienDictionary.Add(order[i], i);
+         }
+        
+        int wordsLength = words.Length; 
+        for(int i = 0; i < wordsLength; i++)
+        {
+            if(i+1 == wordsLength)
+                break;
+            if(!IsOrdered(words[i], words[i+1], alienDictionary))
+                return false;
+        }        
+        return true;
+    }
+    
+    public bool IsOrdered(string firstWord, string secondWord, Dictionary<char,int> alienDictionary)
+    {
+        
+        int firstWordLength = firstWord.Length;
+        int secondWordLength = secondWord.Length;
+        
+        int N = firstWordLength < secondWordLength ? firstWordLength : secondWordLength;
+        
+        for(int i = 0; i < N; i++)
+        {
+            if(alienDictionary[firstWord[i]] > alienDictionary[secondWord[i]])
+                return false;
+            else if(alienDictionary[firstWord[i]] < alienDictionary[secondWord[i]])
+                return true;
+        }
+        
+        if(firstWordLength > secondWordLength)
+            return false;
+        
+        return true;
+    }
+}
