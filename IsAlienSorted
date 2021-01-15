@@ -42,3 +42,48 @@ public class Solution {
         return true;
     }
 }
+
+public class Solution {
+    
+    public bool IsAlienSorted(string[] words, string order) {
+        int[] alienDict = new int[26];
+    
+         for(int i = 0; i < order.Length; i++)
+         {
+             alienDict[order[i] - 'a'] = i;
+             
+         }
+        
+        int wordsLength = words.Length; 
+        for(int i = 0; i < wordsLength; i++)
+        {
+            if(i+1 == wordsLength)
+                break;
+            if(!IsOrdered(words[i], words[i+1], alienDict))
+                return false;
+        }        
+        return true;
+    }
+    
+    public bool IsOrdered(string firstWord, string secondWord, int[] alienDict)
+    {
+        
+        int firstWordLength = firstWord.Length;
+        int secondWordLength = secondWord.Length;
+        
+        int N = firstWordLength < secondWordLength ? firstWordLength : secondWordLength;
+        
+        for(int i = 0; i < N; i++)
+        {
+            if(alienDict[firstWord[i] - 'a'] > alienDict[secondWord[i] -'a'])
+                return false;
+            else if(alienDict[firstWord[i]-'a'] < alienDict[secondWord[i]-'a'])
+                return true;
+        }
+        
+        if(firstWordLength > secondWordLength)
+            return false;
+        
+        return true;
+    }
+}
