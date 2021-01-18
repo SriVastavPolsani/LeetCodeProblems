@@ -1,0 +1,24 @@
+public class Solution {
+    public int FindMaxConsecutiveOnes(int[] nums) {
+        int currConsecutiveOnes = 0;
+        int maxConsecutiveOnes = 0;
+        
+        foreach(int num in nums)
+        {
+            if(num == 1)
+            {
+                currConsecutiveOnes++;
+                if(currConsecutiveOnes > maxConsecutiveOnes)
+                {
+                    maxConsecutiveOnes = currConsecutiveOnes; 
+                }
+            }
+                
+            else
+            {
+              currConsecutiveOnes = 0;  
+            }
+        }
+        return maxConsecutiveOnes;
+    }
+}
