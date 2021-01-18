@@ -24,3 +24,22 @@ public class Solution {
         A[i]=temp;
     }
 }
+
+--Optimized Solution
+public class Solution {
+    public void MoveZeroes(int[] nums) { 
+        int anchor = 0;
+        
+        for(int explorer = 0; explorer < nums.Length; explorer++)
+        {
+            if(nums[explorer] != 0)
+            {
+                int temp = nums[anchor];
+                nums[anchor] = nums[explorer];
+                nums[explorer] = temp;
+                
+                anchor++;
+            }
+        }
+    }
+}
