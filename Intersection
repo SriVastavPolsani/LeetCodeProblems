@@ -45,3 +45,29 @@ public class Solution {
         return intersectionList.ToArray();
     }
 }
+
+public class Solution {
+    public int[] Intersection(int[] nums1, int[] nums2) {
+        HashSet<int> nums1Set = new HashSet<int>(); //Set does not take in dups
+        
+        for(int i = 0; i < nums1.Length; i++)
+        {
+            nums1Set.Add(nums1[i]);
+        }
+        
+        HashSet<int> intersectionSet = new HashSet<int>();
+        
+        for(int i = 0; i < nums2.Length; i++)
+        {
+            if(nums1Set.Contains(nums2[i]))
+            {
+                intersectionSet.Add(nums2[i]);                
+            }
+        }
+        
+        int[] intersectionArray = new int[intersectionSet.Count];
+        intersectionSet.CopyTo(intersectionArray); //Mathod to convert to array from set.
+        
+        return intersectionArray;
+    }
+}
