@@ -1,0 +1,91 @@
+public class MinStack {
+    LinkedList<int> list = new LinkedList<int>();
+    int min = Int32.MaxValue;
+    
+    /** initialize your data structure here. */
+    public MinStack() {
+    }
+    
+    public void Push(int x) {
+        list.AddLast(x);
+        if(min > x)
+            min = x;
+    }
+    
+    public void Pop() {
+        if(min == Top())
+        {            
+            LinkedListNode<int> headNode = list.First;
+            int newMin = Int32.MaxValue;
+            for(int i = 0 ; i < list.Count-1; i++)
+            {
+                if(headNode.Value < newMin)
+                    newMin = headNode.Value;
+                
+                headNode = headNode.Next;
+            }
+            min = newMin;
+        }
+        list.RemoveLast();
+    }
+    
+    public int Top() {
+        int topElement = list.Last.Value;
+        return topElement;
+        
+    }
+    
+    public int GetMin() {       
+        return min;
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.Push(x);
+ * obj.Pop();
+ * int param_3 = obj.Top();
+ * int param_4 = obj.GetMin();
+ */
+ 
+ //Optimized using 2 stacks
+ 
+ public class MinStack {
+    Stack<int> stack = new Stack<int>();
+    Stack<int> minVals = new Stack<int>();
+
+    /** initialize your data structure here. */
+    public MinStack() {
+        
+    }
+    
+    public void Push(int x) {
+        if(minVals.Count == 0 || x <= GetMin())
+            minVals.Push(x);
+        stack.Push(x);
+    }
+    
+    public void Pop() {
+        if(Top() == GetMin())
+            minVals.Pop();
+        stack.Pop();
+    }
+    
+    public int Top() {
+        return stack.Peek();        
+    }
+    
+    public int GetMin() {
+        return minVals.Peek();          
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.Push(x);
+ * obj.Pop();
+ * int param_3 = obj.Top();
+ * int param_4 = obj.GetMin();
+ */
