@@ -1,0 +1,28 @@
+public class RecentCounter {
+    
+    Queue<int> counterList;
+
+    public RecentCounter() {
+        counterList = new Queue<int>(0);
+    }
+    
+    public int Ping(int t) {
+        counterList.Enqueue(t);
+        
+        int oldestRequest = counterList.Peek();
+        
+        while(t-oldestRequest > 3000)
+        {
+            counterList.Dequeue();
+            oldestRequest = counterList.Peek();   
+        }
+        
+        return counterList.Count;
+    }
+}
+
+/**
+ * Your RecentCounter object will be instantiated and called as such:
+ * RecentCounter obj = new RecentCounter();
+ * int param_1 = obj.Ping(t);
+ */
