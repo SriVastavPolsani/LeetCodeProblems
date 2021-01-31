@@ -1,0 +1,15 @@
+public class Solution {
+    public bool IsAnagram(string s, string t) {
+        char[] sArray = s.ToArray();
+        char[] tArray = t.ToArray();
+        
+        Array.Sort(sArray);
+        Array.Sort(tArray);
+        
+        if(string.Join("", sArray) != string.Join("", tArray))
+            return false;
+        else 
+            return true;
+
+    }
+}
