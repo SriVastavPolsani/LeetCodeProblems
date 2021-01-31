@@ -13,3 +13,34 @@ public class Solution {
 
     }
 }
+
+//Faster using a dictionary. Can use an array counter of size 26 if we know string has only lowe case char's.
+public class Solution {
+    public bool IsAnagram(string s, string t) {
+        
+        if(s.Length != t.Length)
+            return false;
+        
+        var charCounter = new Dictionary<char,int>();
+        
+        for(int i = 0; i < s.Length; i++)
+        {
+            if(charCounter.ContainsKey(s[i]))
+                charCounter[s[i]]++;
+            else
+                charCounter.Add(s[i],1);
+            
+            if(charCounter.ContainsKey(t[i]))
+                charCounter[t[i]]--;
+            else
+                charCounter.Add(t[i],-1);
+        }
+        
+        foreach(char c in charCounter.Keys)
+        {
+            if(charCounter[c] != 0)
+                return false;
+        }        
+        return true;
+    }
+}
