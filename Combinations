@@ -1,0 +1,24 @@
+public class Solution {
+    public IList<IList<int>> Combine(int n, int k) {
+        IList<IList<int>> result = new List<IList<int>>();
+        IList<int> curr = new List<int>();
+        CombineRecursive( n,  k, curr, 1, result);
+        return result;
+    }
+    
+    public void CombineRecursive(int n, int k, IList<int> curr, int start, IList<IList<int>> result)
+    {
+        if(curr.Count == k)
+        {
+            result.Add(curr.ToList());     
+            return;
+        }
+        
+        for(int i = start; i<=n; i++)
+        {
+            curr.Add(i);
+            CombineRecursive(n, k, curr, i+1, result);
+            curr.RemoveAt(curr.Count-1);
+        }
+    }
+}
