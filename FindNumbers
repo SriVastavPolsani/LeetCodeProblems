@@ -1,0 +1,43 @@
+public class Solution {
+    public int FindNumbers(int[] nums) {
+        int result = 0;
+        if(nums == null || nums.Length == 0)
+            return result;
+        
+        for(int i = 0; i < nums.Length; i++)
+        {
+            string numString = nums[i].ToString();
+            if (numString.Length%2 == 0)
+                result++;
+        }
+        
+        return result;
+    }
+}
+
+//Faster
+
+public class Solution {
+    public int FindNumbers(int[] nums) {
+        int result = 0;
+        if(nums == null || nums.Length == 0)
+            return result;
+        
+        for(int i = 0; i < nums.Length; i++)
+        {
+            int noOfDigits = 1;
+            
+            while(nums[i]/10 > 0)
+            {
+                nums[i] = nums[i]/10;
+                noOfDigits++;
+            }
+            
+            if(noOfDigits%2 == 0)
+                    result++;                        
+                
+        }
+        
+        return result;
+    }
+}
