@@ -1,0 +1,40 @@
+public class Solution {
+    public int[] SortedSquares(int[] nums) {
+        for(int i = 0; i < nums.Length; i++)
+        {
+            nums[i] = nums[i]*nums[i];
+        }
+        
+        Array.Sort(nums); //O(NLogN)
+        
+        return nums;
+    }
+}
+
+//Optimized
+
+public class Solution {
+    public int[] SortedSquares(int[] nums) {
+        int[] result = new int[nums.Length];
+        
+        int i = 0;
+        int j =  nums.Length-1;
+        
+        int k = nums.Length-1;
+        while(i <= j)
+        {
+            if(Math.Abs(nums[i]) < Math.Abs(nums[j]))
+               {
+                   result[k--] = nums[j]*nums[j];
+                   j--; 
+               } 
+               else
+               {
+                   result[k--] = nums[i]*nums[i];
+                   i++;
+               }                           
+        }
+        
+        return result;
+    }
+}
