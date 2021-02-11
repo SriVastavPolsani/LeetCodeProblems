@@ -1,0 +1,81 @@
+public class MyCircularQueue {
+    
+    int[] mcqArray;
+    int firstElement;
+    int lastCurrElement;
+    int size;
+
+    public MyCircularQueue(int k) {
+        mcqArray = new int[k];
+        firstElement = -1;
+        lastCurrElement = -1;
+        size = k;
+    }
+    
+    public bool EnQueue(int value) {
+        if(IsFull())
+        {
+            return false;           
+        }
+        
+        if(IsEmpty())
+        {
+            firstElement = 0;
+        }
+        
+        lastCurrElement = (lastCurrElement+1)%size;
+        mcqArray[lastCurrElement] = value;
+        return true; 
+    }
+    
+    public bool DeQueue() {
+        if(IsEmpty())
+        {
+            return false;
+        }
+        
+        if(firstElement == lastCurrElement)
+        {
+            firstElement = -1;
+            lastCurrElement = -1;
+            return true;
+        }
+    
+        firstElement = (firstElement + 1)%size;
+        return true;
+            
+    }
+    
+    public int Front() {
+        if(IsEmpty())
+            return -1;
+        else
+            return mcqArray[firstElement];
+    }
+    
+    public int Rear() {
+        if(IsEmpty())
+            return -1;
+        else
+            return mcqArray[lastCurrElement];
+    }
+    
+    public bool IsEmpty() {
+        return firstElement == -1;
+    }
+    
+    public bool IsFull() {
+        return ((lastCurrElement+1)%size) == firstElement;
+    }
+}
+
+/**
+ * Your MyCircularQueue object will be instantiated and called as such:
+ * MyCircularQueue obj = new MyCircularQueue(k);
+ * bool param_1 = obj.EnQueue(value);
+ * bool param_2 = obj.DeQueue();
+ * int param_3 = obj.Front();
+ * int param_4 = obj.Rear();
+ * bool param_5 = obj.IsEmpty();
+ * bool param_6 = obj.IsFull();
+ */
