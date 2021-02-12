@@ -1,0 +1,49 @@
+public class Solution {
+    public int PivotIndex(int[] nums) {
+        int leftSum = 0;
+        int rightSum = 0;
+        
+        for(int i = 0; i < nums.Length; i++)
+        {
+            for(int j = 0; j < i; j++)
+            {
+                leftSum += nums[j];
+            }
+            
+            for(int k = i+1; k < nums.Length; k++)
+            {
+                rightSum += nums[k];
+            }            
+            
+            if(leftSum == rightSum)
+                return i;
+            
+            leftSum = 0;
+            rightSum = 0;
+        }
+        return -1;
+    }
+}
+
+//Optimized
+public class Solution {
+    public int PivotIndex(int[] nums) {
+        int numsLength = nums.Length;
+        int leftSum = 0;
+        int sum = 0;
+        
+        for(int i = 0; i < numsLength; i++)
+        {         
+            sum += nums[i];
+        }
+        
+        for(int i = 0; i < numsLength; i++)
+        {
+            if(leftSum == (sum-leftSum)-nums[i])
+                return i;
+            leftSum += nums[i];
+        }
+        
+        return -1;
+    }
+}
