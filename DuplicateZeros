@@ -1,0 +1,18 @@
+public class Solution {
+    public void DuplicateZeros(int[] arr) {
+        int length = arr.Length;
+        
+        for(int i = 0; i < length-1 ; i++)
+        {
+            if(arr[i] == 0)
+            {
+                for(int j = length-2; j > i; j--)
+                {
+                    arr[j+1] = arr[j];
+                }
+                arr[i+1] = 0;
+                i++;
+            }
+        }        
+    }
+}
