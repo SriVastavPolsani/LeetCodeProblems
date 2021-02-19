@@ -1,0 +1,23 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		string input = Console.ReadLine();
+        int inputNum = Convert.ToInt32(input);
+
+        while(inputNum-- > 0)
+        {
+            string testData = Console.ReadLine();
+            string[] testDataArr = testData.Split(" ");
+            int row = Int32.Parse(testDataArr[0]);
+            int column = Int32.Parse(testDataArr[1]);
+            int index = Math.Min(row, column);
+            int sum1 = (index * (2 +(index -1 )* (column+1)))/2;
+            int sum2 = (index * (2 +(index -1 )* (row+1)))/2;
+
+            Console.WriteLine(sum1 + sum2);
+        }
+	}
+}
