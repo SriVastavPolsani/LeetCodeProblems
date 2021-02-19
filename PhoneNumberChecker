@@ -1,0 +1,16 @@
+using System;
+
+public class Program
+{
+	public static void Main()
+	{
+		Console.WriteLine(7);
+        Console.WriteLine("abcdef");
+        Console.WriteLine("12 34 56");
+        Console.WriteLine("123 45678906");
+        Console.WriteLine("12 456789123");
+        Console.WriteLine("1234567891");
+        Console.WriteLine("10 9872074800");
+        Console.WriteLine("91 6872074800");
+	}
+}
