@@ -1,0 +1,75 @@
+/*
+// Sample code to perform I/O:
+
+name = Console.ReadLine();                  // Reading input from STDIN
+Console.WriteLine("Hi, {0}.", name);        // Writing output to STDOUT
+
+// Warning: Printing unwanted or ill-formatted data to output will cause the test cases to fail
+*/
+
+// Write your code here
+/*
+// Sample code to perform I/O:
+#include <stdio.h>
+
+int main(){
+	int num;
+	scanf("%d", &num);              			// Reading input from STDIN
+	printf("Input number is %d.\n", num);       // Writing output to STDOUT
+}
+
+// Warning: Printing unwanted or ill-formatted data to output will cause the test cases to fail
+*/
+
+// Write your code here
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Program{
+	public static void Main()
+	{
+		int noOfRounds = Int32.Parse(Console.ReadLine());
+		double matches = Math.Pow(2, noOfRounds) - 1;
+		string matchString = "";
+		string[] matchStringArr = new string[]{}; 
+		List<string> participants = new List<string>();
+		List<string> winners = new List<string>();
+		List<string> losers = new List<string>();
+		string roundWinner = "";
+		string roundLoser = "";
+
+		while(matches-- > 0)
+		{
+			matchString = Console.ReadLine();
+			matchStringArr = matchString.Split(" ");
+
+			roundWinner = matchStringArr[0];
+			roundLoser = matchStringArr[1];
+
+			if(!participants.Contains(roundWinner))
+			{
+				participants.Add(roundWinner);
+			}
+
+			if(!participants.Contains(roundLoser))
+			{
+				participants.Add(roundLoser);
+			}
+
+			if(!losers.Contains(roundLoser))
+			{
+				losers.Add(roundLoser);
+			}
+
+			if(!winners.Contains(roundWinner))
+			{
+				winners.Add(roundWinner);
+			}
+
+		}
+
+        var output2 = winners.Except(losers);
+		Console.WriteLine(output2.ElementAt(0));
+	} 
+}
