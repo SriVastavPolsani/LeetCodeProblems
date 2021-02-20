@@ -20,6 +20,7 @@ public class Program{
 
 		while(noOfTestCases-- > 0)
 		{
+            currentTotalPercent = 0 ;
             noOfItems = double.Parse(Console.ReadLine());
             percentsOfChoc = Console.ReadLine();
             percentsOfChocArr = percentsOfChoc.Split(" ");
@@ -28,8 +29,8 @@ public class Program{
                 currentTotalPercent += double.Parse(x);   
             }
             output = currentTotalPercent/noOfItems;
-            
-            Console.WriteLine(Math.Round(output, 8));
+	    
+            Console.WriteLine(output.ToString("N8"));
 		}
 	}
 }
