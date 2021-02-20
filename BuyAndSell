@@ -1,0 +1,80 @@
+/*
+// Sample code to perform I/O:
+
+name = Console.ReadLine();                  // Reading input from STDIN
+Console.WriteLine("Hi, {0}.", name);        // Writing output to STDOUT
+
+// Warning: Printing unwanted or ill-formatted data to output will cause the test cases to fail
+*/
+
+// Write your code here
+using System;
+using System.Collections.Generic;
+
+public class Program{
+    public static void Main(){
+        int noOfItems = Int32.Parse(Console.ReadLine());
+        var itemsPriceDictionary = new Dictionary<string, int>();
+        var itemsCountDictionary = new Dictionary<string, int>();
+
+
+        while(noOfItems-- > 0)
+        {
+            string currLine = Console.ReadLine();
+            string[] currLineArr = currLine.Split(" ");
+
+            itemsPriceDictionary.Add(currLineArr[0], Int32.Parse(currLineArr[1]));
+
+        }
+
+        int noOfOps = Int32.Parse(Console.ReadLine());
+
+        while(noOfOps-- > 0)
+        {
+            string currOpLine = Console.ReadLine();
+            string[] currOpLineArr = currOpLine.Split(" ");
+
+            if(currOpLineArr[0] == "+")
+            {
+                if(itemsCountDictionary.ContainsKey(currOpLineArr[1]))
+                {
+                    itemsCountDictionary[currOpLineArr[1]]++;   
+                }
+                else{
+                    itemsCountDictionary.Add(currOpLineArr[1],1);
+                }
+            //Console.WriteLine(currOpLineArr[1]);
+
+            }
+            else if (currOpLineArr[0] == "-")
+            {
+                if(itemsCountDictionary.ContainsKey(currOpLineArr[1]))
+                {
+                    itemsCountDictionary[currOpLineArr[1]]--;   
+                }
+                //Console.WriteLine(currOpLineArr[1]);
+                
+
+            }
+            else{
+                int output = 0;
+
+                foreach(var x in itemsPriceDictionary.Keys)
+                {
+                    if(itemsPriceDictionary[x] > Int32.Parse(currOpLineArr[1]))
+                    {
+                        if(itemsCountDictionary.ContainsKey(x))
+                        {
+                            output += itemsCountDictionary[x];
+                        }
+                    }
+
+                
+                }
+                Console.WriteLine(output);
+
+            }
+
+        }
+    }
+}
