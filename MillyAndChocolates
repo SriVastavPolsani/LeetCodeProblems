@@ -1,0 +1,35 @@
+/*
+// Sample code to perform I/O:
+
+name = Console.ReadLine();                  // Reading input from STDIN
+Console.WriteLine("Hi, {0}.", name);        // Writing output to STDOUT
+
+// Warning: Printing unwanted or ill-formatted data to output will cause the test cases to fail
+*/
+// Write your code here
+using System;
+
+public class Program{
+	public static void Main(){
+		int noOfTestCases = Int32.Parse(Console.ReadLine());
+		double noOfItems = 0;
+		string percentsOfChoc = ""; 
+        string[] percentsOfChocArr = new string[]{};
+        double currentTotalPercent = 0 ;
+        double output = 0;
+
+		while(noOfTestCases-- > 0)
+		{
+            noOfItems = double.Parse(Console.ReadLine());
+            percentsOfChoc = Console.ReadLine();
+            percentsOfChocArr = percentsOfChoc.Split(" ");
+            foreach(var x in percentsOfChocArr)
+            {
+                currentTotalPercent += double.Parse(x);   
+            }
+            output = currentTotalPercent/noOfItems;
+            
+            Console.WriteLine(Math.Round(output, 8));
+		}
+	}
+}
