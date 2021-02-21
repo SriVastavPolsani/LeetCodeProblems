@@ -1,0 +1,23 @@
+class MovingAverage {
+
+    /** Initialize your data structure here. */
+    Queue<Integer> window = new LinkedList();
+    int windowLength = 0;
+    double windowSum = 0;
+    
+    public MovingAverage(int size) {
+        windowLength = size;
+    }
+    
+    public double next(int val) {
+        window.offer(val);
+        if(window.size() > windowLength)
+        {
+            windowSum -= window.peek();
+            window.poll();
+        }
+        windowSum += val;
+        
+        return windowSum/window.size();
+    }
+}
