@@ -13,3 +13,23 @@ public class Solution {
         return i+1;     
     }
 }
+
+//java O(n) space solution
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int pointer1 = 0;
+        List<Integer> uniqueNums= new ArrayList<Integer>();
+        
+        for(int i = 0; i < nums.length; i++)
+        {
+            if(!uniqueNums.contains(nums[i]))
+            {
+                nums[pointer1] = nums[i];
+                pointer1++;
+                uniqueNums.add(nums[i]);
+            }
+        }
+        
+        return pointer1;
+    }
+}
