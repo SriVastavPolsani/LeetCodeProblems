@@ -1,0 +1,49 @@
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> output = new ArrayList<>();
+        
+        if(matrix.length == 0 || matrix == null)
+            return output;
+        
+        int m = matrix.length;
+        int n = matrix[0].length;
+        
+        //boundaries
+        int lowerRowLimit = 0;
+        int higherRowLimit = m-1;
+        int lowerColLimit = 0;
+        int higherColLimit = n-1;
+        
+        int totalOutputElems = m*n;
+        
+        while(output.size() < totalOutputElems)
+        {
+            
+            for(int i = lowerColLimit ; i <= higherColLimit && output.size() < totalOutputElems; i++)
+            {
+                output.add(matrix[lowerRowLimit][i]);
+            }
+            lowerRowLimit++;
+            
+            for(int i = lowerRowLimit ; i <= higherRowLimit && output.size() < totalOutputElems; i++)
+            {
+                output.add(matrix[i][higherColLimit]);
+            }
+            higherColLimit--;
+            
+            for(int i = higherColLimit ; i >= lowerColLimit && output.size() < totalOutputElems; i--)
+            {
+                output.add(matrix[higherRowLimit][i]);
+            }
+            higherRowLimit--;
+            
+            for(int i = higherRowLimit ; i >= lowerRowLimit && output.size() < totalOutputElems; i--)
+            {
+                output.add(matrix[i][lowerColLimit]);
+            }
+            lowerColLimit++;
+            
+        }
+        return output;
+    }
+}
