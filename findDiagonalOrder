@@ -1,0 +1,42 @@
+class Solution {
+    public int[] findDiagonalOrder(int[][] matrix) {
+        if(matrix.length == 0)
+            return new int[0];
+        
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        int totalElements = rows*columns;
+        
+        int[] result = new int[totalElements];
+        
+        int i = 0, j = 0;
+        
+        for(int k = 0; k < totalElements; k++) {
+            result[k] = matrix[i][j];
+            
+            if((i + j)%2 == 0) {
+                if(j == columns - 1) //order important here not to go out of bounds @ (0,max(n))
+                    i++;
+                else if(i == 0)
+                    j++;               
+                else {
+                    i--;
+                    j++;
+                }
+            }
+            
+            else {
+                if(i == rows - 1) //order important here not to go out of bounds @ (max(m),0)
+                    j++;
+                else if(j == 0)
+                    i++;
+                else {
+                    i++;
+                    j--;
+                }
+                
+            }
+        }
+        return result;
+    }
+}
