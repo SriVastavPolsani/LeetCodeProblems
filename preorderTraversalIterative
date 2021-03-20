@@ -1,0 +1,37 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        LinkedList<Integer> output = new LinkedList<>();
+        if(root == null)
+            return output;
+        
+        LinkedList<TreeNode> stack = new LinkedList<>();
+        stack.add(root); //Pre order traversal means parent first
+        while(!stack.isEmpty()) {
+            TreeNode currNode = stack.pollLast();
+            output.add(currNode.val);
+            
+            if(currNode.right != null) {
+                stack.add(currNode.right); //add the right child first because you are going to poll                                               //left first
+            }
+            if(currNode.left != null) {
+                stack.add(currNode.left); //adding left after right means left will be added to ouput                                               //before right
+            }            
+        }
+        return output;
+    }
+}
