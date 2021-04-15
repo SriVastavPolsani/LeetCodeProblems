@@ -1,0 +1,16 @@
+class Solution {
+    public int[] sortArrayByParity(int[] A) {
+        int writePointer = 0;
+        
+        for(int readPointer = 0; readPointer < A.length; readPointer++) {
+            if(A[readPointer]%2 == 0) {
+                int temp = A[writePointer];
+                A[writePointer] = A[readPointer];
+                A[readPointer] = temp;
+                writePointer++;
+            }
+        }
+        
+        return A;
+    }
+}
