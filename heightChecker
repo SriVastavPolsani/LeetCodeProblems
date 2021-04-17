@@ -1,0 +1,24 @@
+class Solution {
+    public int heightChecker(int[] heights) {
+        int[] heightsFrequency = new int[101];
+        for(int height : heights) {
+            heightsFrequency[height]++;
+        }
+        
+        int result = 0;
+        int currHeight = 0;
+        
+        for(int i = 0; i < heights.length; i++) {
+            
+            while(heightsFrequency[currHeight] == 0) {
+                currHeight++;
+            }
+            
+            if(currHeight != heights[i]) 
+                result++;
+            
+            heightsFrequency[currHeight]--;
+        }
+        return result;
+    }
+}
