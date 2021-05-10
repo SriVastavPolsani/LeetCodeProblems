@@ -1,0 +1,86 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int countUnivalSubtrees(TreeNode root) {
+                int uniValSubTrees = 0;
+        
+        if(root == null) {
+            return uniValSubTrees;
+        }
+        
+        Stack<TreeNode> nodesStack = new Stack<TreeNode>();
+        
+        nodesStack.push(root);
+        
+        while(!nodesStack.isEmpty()) {
+            TreeNode currNode = nodesStack.pop();
+            
+            if(currNode.left == null && currNode.right == null) {
+                if(isUnivalSubtree(currNode)){
+                    uniValSubTrees++;                   
+                }
+            }
+            
+            if(currNode.left != null && currNode.right != null) {
+                if(isUnivalSubtree(currNode)){
+                    uniValSubTrees++;                   
+                }
+                nodesStack.push(currNode.left);
+                nodesStack.push(currNode.right);
+            }
+            
+            if(currNode.left == null && currNode.right != null) {
+                if(isUnivalSubtree(currNode)){
+                    uniValSubTrees++;                   
+                }
+                nodesStack.push(currNode.right);            
+            }
+               
+            if(currNode.left != null && currNode.right == null) {
+                if(isUnivalSubtree(currNode)){
+                    uniValSubTrees++;                   
+                }
+                nodesStack.push(currNode.left);
+            }                         
+        }
+        return uniValSubTrees;
+        
+    }
+    
+    public boolean isUnivalSubtree(TreeNode node) {
+        if(node.left == null && node.right == null)
+            return true;
+        
+        if(node.left != null && node.right != null) {
+                if((node.left.val == node.val) && (node.right.val == node.val) && (isUnivalSubtree(node.left)) && (isUnivalSubtree(node.right))) {
+                    return true;
+                }
+            }
+            
+            if(node.left == null && node.right != null) {
+                if((node.right.val == node.val) && isUnivalSubtree(node.right)){
+                    return true;               
+                }           
+            }
+               
+            if(node.left != null && node.right == null) {
+                if((node.left.val == node.val) && isUnivalSubtree(node.left)){
+                    return true;               
+                }
+            }
+        return false;
+    }
+}
