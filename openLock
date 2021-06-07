@@ -1,0 +1,50 @@
+class Solution {
+    public int openLock(String[] deadends, String target) {
+        int[][] moves = new int[][]{{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1},{-1,0,0,0},{0,-1,0,0},{0,0,-1,0},{0,0,0,-1}};
+    int level = 0;
+    
+    HashSet<String> deads = new HashSet<String>();
+    for(String d : deadends) {
+        deads.add(d);
+    }
+    
+    Queue<String> possibilities = new LinkedList<>();
+    possibilities.offer("0000");
+    
+    while(!possibilities.isEmpty()) {
+        int possSize = possibilities.size();
+        for(int i = 0; i < possSize; i++) {
+            String current = possibilities.poll();
+            
+            if(deads.contains(current)){
+                continue;
+            }
+            
+            if(target.equals(current)) {
+                return level;
+            }
+            
+            deads.add(current);
+            
+            for(int j = 0; j < moves.length; j++) {
+                int[] currWithVal = new int[] {current.charAt(0)-'0', current.charAt(1)-'0', current.charAt(2)-'0', current.charAt(3)-'0' };
+                
+                for(int k = 0; k < currWithVal.length; k++) {
+                    currWithVal[k] += moves[j][k];
+                    
+                    currWithVal[k] = currWithVal[k] > 9 ? 0 : currWithVal[k];
+                    currWithVal[k] = currWithVal[k] < 0 ? 9 : currWithVal[k];
+                }
+                
+                String updated = "" + currWithVal[0] + currWithVal[1] + currWithVal[2]+ currWithVal[3];
+                
+                if(!deads.contains(updated)) {
+                    possibilities.offer(updated);
+                }
+            }
+        }
+        level++;
+    }
+        return -1;
+}
+}
