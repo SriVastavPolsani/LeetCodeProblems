@@ -1,0 +1,32 @@
+class Solution {
+    public int numSquares(int n) {
+        List<Integer> perfectSquares = new LinkedList<Integer>();
+        for(int i = 0; i * i <= n ; i++) {
+            perfectSquares.add(i*i);
+        }
+        
+        Set<Integer> queue = new HashSet<Integer>();
+        queue.add(n);
+        int level = 0;
+        
+        while(!queue.isEmpty()) {
+            level += 1;
+            Set<Integer> newQueue = new HashSet<Integer>();
+            for(Integer qElem : queue) {
+                for(Integer ps : perfectSquares) {
+                    if(perfectSquares.contains(qElem)) {
+                        return level;
+                    }
+                    else if(ps > qElem) {
+                        break;
+                    }
+                    else {
+                        newQueue.add(qElem-ps);
+                    }
+                }
+            }
+            queue = newQueue;
+        }
+        return level;
+    }
+}
