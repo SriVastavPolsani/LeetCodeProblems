@@ -1,0 +1,33 @@
+class Solution {
+    public boolean isValid(String s) {
+        HashSet<Character> openBracketList = new HashSet<Character>();
+        Stack<Character> expectedCloseBracket = new Stack<Character>();
+        
+        openBracketList.add('(');
+        openBracketList.add('{');
+        openBracketList.add('[');
+        
+        for(char c : s.toCharArray()) {
+            if(openBracketList.contains(c)) {
+                if(c == '(') {
+                    expectedCloseBracket.push(')');
+                }
+                else if(c == '[') {
+                    expectedCloseBracket.push(']');
+                }
+                if(c == '{') {
+                    expectedCloseBracket.push('}');
+                }
+            }
+            else {
+                if(expectedCloseBracket.empty() || c != expectedCloseBracket.pop()) {
+                    return false;
+                }
+            }
+        }
+        if(!expectedCloseBracket.empty()) {
+            return false;
+        }
+        return true;
+    }
+}
