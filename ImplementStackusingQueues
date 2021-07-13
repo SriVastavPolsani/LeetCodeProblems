@@ -1,0 +1,74 @@
+class MyStack {
+    Queue<Integer> pushQueue;
+    Queue<Integer> popQueue;
+    int topElement;
+
+    /** Initialize your data structure here. */
+    public MyStack() {
+        pushQueue = new LinkedList<Integer>();
+        popQueue = new LinkedList<Integer>();
+        topElement = 0;
+    }
+    
+    /** Push element x onto stack. */
+    public void push(int x) {
+        pushQueue.add(x);
+        topElement = x;
+    }
+    
+    /** Removes the element on top of the stack and returns that element. */
+    public int pop() {
+        if(!pushQueue.isEmpty()) {
+            int pushQueueSize = pushQueue.size();
+            while(!pushQueue.isEmpty()) {
+                topElement = pushQueue.remove();
+                if(popQueue.size() != pushQueueSize - 1) {
+                    popQueue.add(topElement); 
+                } 
+            }
+            return topElement;       
+        }
+        else {
+            int popQueueSize = popQueue.size();
+            while(!popQueue.isEmpty()){
+                topElement = popQueue.remove();
+                if(pushQueue.size() != popQueueSize - 1) {
+                    pushQueue.add(topElement); 
+                } 
+            }
+            return topElement;
+        }
+    }
+    
+    /** Get the top element. */
+    public int top() {
+        if(!pushQueue.isEmpty()) {
+            while(!pushQueue.isEmpty()) {
+                topElement = pushQueue.remove();
+                popQueue.add(topElement);
+            }
+            return topElement;        
+        }
+        else {
+            while(!popQueue.isEmpty()){
+                topElement = popQueue.remove();
+                pushQueue.add(topElement); 
+            }
+            return topElement;
+        }
+    }
+    
+    /** Returns whether the stack is empty. */
+    public boolean empty() {
+        return (pushQueue.isEmpty() && popQueue.isEmpty());
+    }
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
