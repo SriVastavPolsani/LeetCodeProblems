@@ -1,0 +1,39 @@
+class Solution {
+    public int[] sortArray(int[] nums) {
+        if(nums.length <= 1){
+            return nums;
+        }
+        
+        int pivot = nums.length/2;
+        int[] leftArray = sortArray(Arrays.copyOfRange(nums, 0, pivot));
+        int[] rightArray = sortArray(Arrays.copyOfRange(nums, pivot, nums.length));
+        return mergeArrays(leftArray, rightArray);
+    }
+    
+    private int[] mergeArrays(int[] leftArray, int[] rightArray){
+        int[] returnArray = new int[leftArray.length + rightArray.length];
+        
+        int leftArrayIndex = 0;
+        int rightArrayIndex = 0;
+        int returnArrayIndex = 0;
+        
+        while(leftArrayIndex < leftArray.length && rightArrayIndex < rightArray.length) {
+            if(leftArray[leftArrayIndex] <= rightArray[rightArrayIndex]){
+                returnArray[returnArrayIndex++] = leftArray[leftArrayIndex++];
+            } 
+            else{
+                returnArray[returnArrayIndex++] = rightArray[rightArrayIndex++];
+            }
+        }
+        
+        while(leftArrayIndex < leftArray.length) {
+            returnArray[returnArrayIndex++] = leftArray[leftArrayIndex++];
+        }
+        
+        while(rightArrayIndex < rightArray.length) {
+            returnArray[returnArrayIndex++] = rightArray[rightArrayIndex++];
+        }
+        
+        return returnArray;
+    }
+}
