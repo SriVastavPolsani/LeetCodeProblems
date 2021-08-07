@@ -1,0 +1,57 @@
+class Solution {
+    int size;
+    List<List<String>> solutions = new ArrayList<List<String>>();
+    
+    public List<List<String>> solveNQueens(int n) {
+        size = n;
+        char[][] board = new char[n][n];
+        
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n ; j++){
+                board[i][j] = '.';
+            }
+        }
+        
+        backTrack(0, new HashSet<>(), new HashSet<>(), new HashSet<>(), size, board);
+        return solutions;
+    }
+    
+    private void backTrack(int row, HashSet<Integer> cols, HashSet<Integer> diagonals, HashSet<Integer> antiDiagonals, int size, char[][] board){
+        if(row == size){
+            solutions.add(drawBoard(board));
+            return;
+        }
+        
+        for(int col = 0; col < size; col++){
+            int diagonal = row - col;
+            int antiDiagonal = row + col;
+            
+            if(cols.contains(col) || diagonals.contains(diagonal) || antiDiagonals.contains(antiDiagonal)){
+                continue;
+            }
+            
+            cols.add(col);
+            diagonals.add(diagonal);
+            antiDiagonals.add(antiDiagonal);
+            board[row][col] = 'Q';
+            
+            backTrack(row+1, cols, diagonals, antiDiagonals, size, board);
+            
+            cols.remove(col);
+            diagonals.remove(diagonal);
+            antiDiagonals.remove(antiDiagonal);
+            board[row][col] = '.';
+        }
+    }
+    
+    private List<String> drawBoard(char[][] board){
+        List<String> currBoard = new ArrayList<String>();
+        
+        for(int i = 0; i < board.length; i++){
+            String currRow = String.valueOf(board[i]);
+            currBoard.add(currRow);
+        }
+        
+        return currBoard;
+    }
+}
