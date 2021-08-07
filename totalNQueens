@@ -1,0 +1,46 @@
+class Solution {
+    int size;
+    int solution;
+    
+    public int totalNQueens(int n) {
+        size = n;
+        char[][] board = new char[n][n];
+        
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                board[i][j] = '.';
+            }
+        }
+        
+        backTrack(0, new HashSet<>(), new HashSet<>(), new HashSet<>(), size, board);
+        return solution;
+    }
+    
+    private void backTrack(int row, HashSet<Integer> cols, HashSet<Integer> diagonals, HashSet<Integer> antiDiagonals, int size, char[][] board){
+        if(row == size){
+            solution++;
+            return;
+        }
+        
+        for(int col = 0; col < size; col++){
+            int diagonal = row - col;
+            int antiDiagonal = row+ col;
+            
+            if(cols.contains(col) || diagonals.contains(diagonal) || antiDiagonals.contains(antiDiagonal)){
+                continue;
+            }
+            
+            cols.add(col);
+            diagonals.add(diagonal);
+            antiDiagonals.add(antiDiagonal);
+            board[row][col] = 'Q';
+            
+            backTrack(row+1, cols, diagonals, antiDiagonals, size, board);
+            
+            cols.remove(col);
+            diagonals.remove(diagonal);
+            antiDiagonals.remove(antiDiagonal);
+            board[row][col] = '.';
+        }
+    }
+}
