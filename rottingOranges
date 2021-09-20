@@ -1,0 +1,58 @@
+class Solution {
+    public int orangesRotting(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        
+        if(m == 0 || grid == null){
+            return 0;
+        }
+        
+        int minutes = 0;
+        int freshOranges = 0;
+        Queue<int[]> q = new LinkedList<>();
+        
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(grid[i][j] == 2){
+                    q.add(new int[]{i,j});
+                    grid[i][j] = -1;
+                }
+                if(grid[i][j] == 1){
+                    freshOranges += 1;
+                }
+            }
+        }
+        
+        int[][] directions = new int[][]{{-1,0}, {1,0}, {0,1}, {0,-1}};
+        
+        while(!q.isEmpty()){
+            int qSize = q.size();
+            boolean rottenIteration = false;
+            for(int i = 0; i < qSize; i++){
+                int[] current = q.poll();
+                int currX = current[0];
+                int currY = current[1];
+                for(int[] dir : directions){
+                    int nextX = currX + dir[0];
+                    int nextY = currY + dir[1];
+                    
+                    if(nextX <  0 || nextX == grid.length || nextY < 0 || nextY == grid[0].length || grid[nextX][nextY] != 1){
+                        continue;
+                    }
+                    
+                    freshOranges -= 1;
+                    q.add(new int[]{nextX,nextY});
+                    grid[nextX][nextY] = -1;
+                    rottenIteration = true;
+                }
+            }
+            if(rottenIteration){
+                minutes += 1;
+            }
+        }
+        if(freshOranges>0){
+            return -1;
+        }
+        return minutes;
+    }
+}
