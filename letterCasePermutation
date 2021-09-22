@@ -1,0 +1,30 @@
+class Solution {
+    public List<String> letterCasePermutation(String s) {
+        List<StringBuilder> answers = new ArrayList<>(); 
+        answers.add(new StringBuilder());
+        
+        for(char c : s.toCharArray()){
+            int size = answers.size();
+            if(Character.isLetter(c)){
+                for(int i = 0; i < size; i++){
+                    answers.add(new StringBuilder(answers.get(i)));
+                    answers.get(i).append(Character.toLowerCase(c));
+                    answers.get(size+i).append(Character.toUpperCase(c));
+                }
+            }
+            else{
+                for(int i = 0; i < size; i++){
+                    answers.get(i).append(c);
+                }
+            }
+        }
+        
+        List<String> finalAnswers = new ArrayList<>();
+        
+        for(StringBuilder sb : answers){
+            finalAnswers.add(sb.toString());
+        }
+        
+        return finalAnswers;
+    }
+}
