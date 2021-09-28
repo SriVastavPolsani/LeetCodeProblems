@@ -1,0 +1,20 @@
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        HashSet<String> seen = new HashSet<>();
+        
+        int rows = board.length;
+        int columns = board[0].length;
+        
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < columns; j++){
+                char element = board[i][j];
+                if(element != '.'){
+                    if(!seen.add(board[i][j]+ " added to row " + i) || !seen.add(board[i][j]+ " added to column " + j) || !seen.add(board[i][j]+ " added to subsquare" + i/3 +"-"+j/3)){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}
